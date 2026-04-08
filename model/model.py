@@ -20,9 +20,10 @@ class Model:
     def get_studenti_corso(self, codins):
         if codins is None or codins == "":
             return []
-        return CorsoDAO.get_studenti_corso(codins)
+        # Chiamiamo StudenteDAO invece di CorsoDAO
+        return StudenteDAO.get_studenti_corso(codins)
 
     def get_studente_by_matricola(self, matricola):
         if not matricola.isdigit():
             return []
-        return CorsoDAO.get_studente_by_matricola(matricola)
+        return StudenteDAO.get_studente_by_matricola(matricola)
