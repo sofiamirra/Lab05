@@ -1,6 +1,5 @@
 import flet as ft
 
-
 class Controller:
     def __init__(self, view, model):
         # the view, with the graphical elements of the UI
@@ -11,11 +10,11 @@ class Controller:
     # Cerca gli studenti iscritti ad un corso
     def handle_cerca_iscritti(self, e):
         cod_corso = self._view.dd_corso.value # selezione dell'utente nel dropdown
-        if cod_corso is None:
+        if not cod_corso:
             self._view.create_alert("Selezionare un corso!")
             return
 
-        studenti = self.model.get_studenti(cod_corso) # lista di studenti dal Model
+        studenti = self._model.get_studenti_corso(cod_corso) # lista di studenti dal Model
         self._view.txt_result.controls.clear() # pulisce l'area di stampa
         if not studenti:
             self._view.txt_result.controls.append(ft.Text(f"Nessun iscritto trovato per questo corso"))
@@ -26,12 +25,12 @@ class Controller:
         self._view.update_page()
 
     def handle_cerca_studente(self, e):
-        matricola = self._view.matricola.value  # selezione della matricola nell'input
+        matricola = self._view.txt_matricola.value  # selezione della matricola nell'input
         if matricola == "":
             self._view.create_alert("Inserire una matricola!")
             return
 
-        studente = self.model.get_studente_by_matricola(matricola)  # lista di studenti dal Model
+        studente = self._model.get_studente_by_matricola(matricola)  # lista di studenti dal Model
         if studente is None:
             self._view.create_alert("Matricola non trovata!")
             return
@@ -41,12 +40,12 @@ class Controller:
         self._view.update_page()
 
     def handle_cerca_corsi(self, e):
-        matricola = self._view.matricola.value  # selezione della matricola nell'input
+        matricola = self._view.txt_matricola.value  # selezione della matricola nell'input
         if matricola == "":
             self._view.create_alert("Inserire una matricola!")
             return
 
-        studente = self.model.get_studente_by_matricola(matricola)  # verifichiamo che lo studente esista
+        studente = self._model.get_studente_by_matricola(matricola)  # verifichiamo che lo studente esista
         if studente is None:
             self._view.create_alert("Matricola non trovata!")
             return
@@ -59,8 +58,9 @@ class Controller:
             self._view.txt_result.controls.append(ft.Text(f"Risultano {len(corsi)} corsi"))
             for c in corsi:
                 self._view.txt_result.controls.append(ft.Text(c))
+        self._view.update_page()
 
-    def handle_iscriviti(self, e):
+    def handle_iscrivi(self, e):
         self._view.create_alert("Non ancora implementata")
 
     def fill_dropdown(self):

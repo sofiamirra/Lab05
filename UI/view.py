@@ -1,9 +1,9 @@
 import flet as ft
 
 
-class View(ft.UserControl):
+class View:
     def __init__(self, page: ft.Page):
-        super().__init__()
+        # super().__init__()
         # Inizializzazione elementi fisici interfaccia
         self._page = page
         self._page.title = "Lab O5 - segreteria studenti"
@@ -32,7 +32,7 @@ class View(ft.UserControl):
         self._page.controls.append(self._title)
 
         # Costruzione riga 1
-        self.dd_corso = ft.DropDown(
+        self.dd_corso = ft.Dropdown(
             label="corso",
             width=200,
             hint_text="Selezionare un corso",
@@ -52,13 +52,13 @@ class View(ft.UserControl):
         self.txt_nome = ft.TextField(
             label="nome",
             width=200,
-            readonly=True, # campo non editabile
+            read_only=True, # campo non editabile
         )
 
         self.txt_cognome = ft.TextField(
             label="cognome",
             width=200,
-            readonly=True, # campo non editabile
+            read_only=True, # campo non editabile
         )
         row2 = ft.Row([self.txt_matricola, self.txt_nome, self.txt_cognome],
                       alignment=ft.MainAxisAlignment.CENTER)
