@@ -73,7 +73,7 @@ class View:
         row3 = ft.Row([self.btn_cerca_studente, self.btn_cerca_corsi, self.btn_iscrivi],
                       alignment=ft.MainAxisAlignment.CENTER)
 
-        # Aggiunfiamo tutto alla pagina
+        # Aggiungiamo tutto alla pagina
         self._page.controls.append(row1)
         self._page.controls.append(row2)
         self._page.controls.append(row3)
